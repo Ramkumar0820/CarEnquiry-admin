@@ -1,75 +1,82 @@
-import { FaHome, FaCar, FaPlus, FaList } from "react-icons/fa";
-import { IoIosColorPalette } from "react-icons/io";
-import { FaBell } from "react-icons/fa6";
-import { SiRollsroyce } from "react-icons/si";
-import { BiSolidUserAccount } from "react-icons/bi";
-import { FaUserCog } from "react-icons/fa";
-import { GiCarDoor } from "react-icons/gi";
-import { AiOutlineSafety } from "react-icons/ai";
+import {
+  LayoutDashboard,
+  ShieldCheck,
+  Mail,
+  Phone,
+  Car,
+  PlusCircle,
+  List,
+  Palette,
+  DoorOpen,
+  Shield,
+  Layers,
+  CarFront
+} from "lucide-react";
 
 export const menuLinks = {
   dashBoard: [
     {
       title: "Dashboard",
       href: "/",
-      icon: FaHome,
+      icon: LayoutDashboard,
     },
-    // {
-    //   title: "Admin Profile",
-    //   href: "/dashboard/adminProfile",
-    //   icon: BiSolidUserAccount,
-    // },
     {
       title: "Admin Roles",
       href: "/dashboard/adminRoles",
-      icon: FaUserCog,
+      icon: ShieldCheck,
     },
     {
       title: "Inquiry",
       href: "/dashboard/inquiry",
-      icon: FaBell,
+      icon: Mail,
+    },
+    {
+      title: "Contact Inquiry",
+      href: "/dashboard/contact-inquiry",
+      icon: Phone,
     },
   ],
+
   listing: [
     {
       title: "Car Listings",
       href: "/dashboard/listing",
-      icon: FaCar,
+      icon: Car,
     },
     {
       title: "New Listing",
       href: "/dashboard/listing/new",
-      icon: FaPlus,
+      icon: PlusCircle,
     },
     {
       title: "Make",
       href: "/dashboard/listing/make",
-      icon: SiRollsroyce,
+      icon: CarFront, // brand/manufacturer feel
     },
     {
       title: "Model",
       href: "/dashboard/listing/model",
-      icon: FaList,
+      icon: Layers,
     },
     {
       title: "Color",
       href: "/dashboard/listing/color",
-      icon: IoIosColorPalette,
+      icon: Palette,
     },
     {
       title: "Features",
       href: "/dashboard/listing/features",
-      icon: GiCarDoor,
+      icon: DoorOpen,
     },
     {
       title: "Safety Features",
       href: "/dashboard/listing/safety-features",
-      icon: AiOutlineSafety,
+      icon: Shield,
     },
     {
       title: "Type",
       href: "/dashboard/listing/type",
-      icon: FaList,
+      icon: List,
     },
   ],
 };

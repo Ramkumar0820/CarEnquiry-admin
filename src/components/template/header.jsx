@@ -77,65 +77,66 @@ export default function Header() {
     <header className="sticky top-0 z-50 main-head py-2 px-3 md:px-7 shadow-md bg-white">
       <div className="flex justify-between items-center">
 
-        {/* Logo */}
-        <Link href="/">
-          {/* <img src="/logo1.png" alt="Logo" className="logo-img" /> */}
+        {/* LOGO */}
+        <Link href="/" className="flex items-center gap-2">
           <Image
             src="/logo1.png"
             alt="Logo"
-            width={20}
-            height={20}
-            className="logo-img"
+            width={100}
+            height={100}
+            className="object-contain"
           />
         </Link>
 
-        {/* Right Section */}
+        {/* RIGHT SIDE */}
         <div className="flex items-center gap-4">
 
-          {/* Notification Section */}
-          <div className="relative mt-4">
-            {/* notifications component handles fetching and UI */}
+          {/* Notifications */}
+          <div className="relative mt-2">
             <Notifications />
           </div>
 
-          {/* Profile Section */}
+          {/* PROFILE */}
           <div
-            className="relative border border-black p-2 rounded-full"
+            className="relative"
             ref={profileRef}
           >
             <button
               onClick={toggleProfile}
-              className="flex items-center text-gray-700 hover:text-black"
+              className="flex items-center justify-center w-10 h-10 rounded-full bg-gray-100 hover:bg-gray-200 transition"
             >
-              <FiUser className="w-5 h-5" />
+              <FiUser className="w-5 h-5 text-gray-700" />
             </button>
 
-            {profileOpen && (
-              <div className="absolute right-0 mt-2 w-40 bg-white border rounded-lg shadow-md z-50">
-                <Link
-                  href="/dashboard/adminProfile"
-                  className="flex items-center gap-2 px-4 py-2 hover:bg-gray-100"
-                >
-                  <FiUserCheck className="w-4 h-4" />
-                  Profile
-                </Link>
-                <button
-                  onClick={handleLogout}
-                  className="flex items-center gap-2 w-full px-4 py-2 hover:bg-gray-100 text-left"
-                >
-                  <FiLogOut className="w-4 h-4" />
-                  Logout
-                </button>
-              </div>
-            )}
+            {/* DROPDOWN */}
+            <div
+              className={`absolute right-0 mt-2 w-44 bg-white border rounded-xl shadow-lg transition-all duration-200 ${
+                profileOpen
+                  ? "opacity-100 translate-y-0 visible"
+                  : "opacity-0 translate-y-2 invisible"
+              }`}
+            >
+              <Link
+                href="/dashboard/adminProfile"
+                className="flex items-center gap-2 px-4 py-2 hover:bg-gray-100 rounded-t-xl"
+              >
+                <FiUserCheck className="w-4 h-4" />
+                Profile
+              </Link>
+
+              <button
+                onClick={handleLogout}
+                className="flex items-center gap-2 w-full px-4 py-2 hover:bg-red-50 text-left text-red-600 rounded-b-xl"
+              >
+                <FiLogOut className="w-4 h-4" />
+                Logout
+              </button>
+            </div>
           </div>
 
-          {/* Hamburger Menu (Mobile Only) */}
-          <div className="md:hidden mt-4">
-            <button
-              className="text-gray-800 focus:outline-none"
-              onClick={toggleMenu}
-            >
+          {/* MOBILE MENU BUTTON */}
+          <div className="md:hidden mt-2">
+            <button onClick={toggleMenu}>
               {menuOpen ? (
                 <FiX className="w-6 h-6" />
               ) : (
@@ -146,18 +147,24 @@ export default function Header() {
         </div>
       </div>
 
-      {/* Slide-in Menu */}
+      {/* MOBILE SIDEBAR */}
       <div
-        className={`fixed inset-0 bg-black bg-opacity-50 transform ${menuOpen ? "translate-x-0" : "-translate-x-full"
-          } transition-transform duration-300 ease-in-out md:hidden`}
+        className={`fixed inset-0 z-50 bg-black/50 transition ${
+          menuOpen ? "visible opacity-100" : "invisible opacity-0"
+        }`}
       >
-        <div className="bg-white w-64 h-full shadow-lg">
+        <div
+          className={`bg-white w-64 h-full shadow-xl transform transition-transform duration-300 ${
+            menuOpen ? "translate-x-0" : "-translate-x-full"
+          }`}
+        >
           <button
-            className="text-gray-800 focus:outline-none p-4"
+            className="p-4"
             onClick={toggleMenu}
           >
             <FiX className="w-6 h-6" />
           </button>
+
           <AdminMenu />
         </div>
       </div>

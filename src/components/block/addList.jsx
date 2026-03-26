@@ -6,24 +6,26 @@ import { ClassicEditor, editorConfig } from "@/lib/editorConfig";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import React from "react";
+import { useRouter } from "next/navigation";
 
 const todayDate = new Date().toISOString().split("T")[0];
 
 const PostList = () => {
+  const router = useRouter();
   const [formData, setFormData] = useState({
     title: "",
     // image: "",
     image: null,
     price: "",
-    priceCurrency: "NGN",
+    priceCurrency: "INR",
     description: "",
     make: "",
     model: "",
     year: "",
     mileage: "",
     mileageUnit: "KMPL",
-    itemCondition: "New",
-    availability: "InStock",
+    // itemCondition: "New",
+    // availability: "InStock",
     vin: "",
     bodyType: "",
     color: "",
@@ -49,10 +51,10 @@ const PostList = () => {
   const [safetyFeatureData, setSafetyFeatureData] = useState([]);
   const [isModelDisabled, setIsModelDisabled] = useState(true);
 
-  const [availabilityOptions] = useState(["InStock", "OutOfStock"]);
+  // const [availabilityOptions] = useState(["InStock", "OutOfStock"]);
   const [mileageUnitOptions] = useState(["KMPL", "SMI"]);
   const [priceCurrencyOptions] = useState(["NGN", "INR", "USD", "EUR", "GBP"]);
-  const [itemConditionOptions] = useState(["New", "Used"]);
+  // const [itemConditionOptions] = useState(["New", "Used"]);
   const [fuelTypeOptions] = useState([
     "Petrol",
     "Diesel",
@@ -119,16 +121,16 @@ const PostList = () => {
   };
 
   const requiredFields = [
-    "title",
-    "price",
-    "make",
-    "model",
-    "year",
-    "color",
-    "numberOfDoors",
-    "vehicleSeatingCapacity",
-    "date",
-  ];
+  "title",
+  "price",
+  "make",
+  "model",
+  "year",
+  "color",
+  "numberOfDoors",
+  "vehicleSeatingCapacity",
+  "date",
+];
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -177,6 +179,7 @@ const PostList = () => {
         toast.error(data.error || "Something went wrong");
       } else {
         toast.success(data.message);
+        router.replace('/dashboard/listing')
       }
     } catch (error) {
       toast.error(error.message);
@@ -260,7 +263,12 @@ const PostList = () => {
               }}
             />
           </div>
-          {renderInputField("price", "price", "Enter price", "Price")}
+          {renderInputField(
+  "price",
+  "price",
+  "Enter price per km",
+  "Price (₹ / KM)"
+)}
         </div>
         <div className="flex justify-center items-center gap-3 flex-col md:flex-row">
           {renderSelectField(
@@ -285,7 +293,7 @@ const PostList = () => {
         </div>
         <div className="flex justify-center items-center gap-3 flex-col md:flex-row">
           {renderInputField("year", "year", "Enter car year", "Year", "number")}
-          {renderSelectField(
+          {/* {renderSelectField(
             "Item Condition",
             "itemCondition",
             formData.itemCondition,
@@ -296,7 +304,7 @@ const PostList = () => {
             "availability",
             formData.availability,
             availabilityOptions,
-          )}
+          )} */}
           {/* {renderInputField( 
             "mileage",
             "mileage",

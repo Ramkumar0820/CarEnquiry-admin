@@ -21,11 +21,11 @@ export default function RootLayout({ children }) {
           {!isLoginPage && <Header />}
           <div className="flex">
             {!isLoginPage && (
-              <div className="fixed w-72 p-4 bg-white shadow-md h-full hidden md:block">
+              <div className="fixed w-72 bg-white shadow-md h-full hidden md:block">
                 <AdminMenu />
               </div>
             )}
-            <div className={`w-full h-full bg-white p-4 overflow-hidden ${!isLoginPage ? 'md:ml-72' : ''}`}>
+            <div className={`w-full h-full bg-white overflow-hidden ${!isLoginPage ? 'md:ml-72' : ''}`}>
               {children}
             </div>
           </div>
