@@ -1,4 +1,3 @@
-import DummyNotification from "@/models/DummyNotification";
 import Notification from "@/models/Notification";
 import Admin from "@/models/Admin";
 
