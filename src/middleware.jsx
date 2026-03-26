@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import { jwtVerify } from 'jose';
 
-const SECRET_KEY = new TextEncoder().encode('chendanvasu');
+const SECRET_KEY = new TextEncoder().encode('SRM_Travels');
 
 export async function middleware(request) {
   const authToken = request.cookies.get('auth_token')?.value;

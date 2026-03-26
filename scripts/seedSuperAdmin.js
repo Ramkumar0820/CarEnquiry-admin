@@ -25,7 +25,7 @@ async function seedSuperAdmin() {
     await Admin.create({
       firstName: "Super",
       lastName: "Admin",
-      email: "admin@carsale.com",
+      email: "ranjithkumarsrmtravels@gmail.com",
       password: hashed,
       role: "SUPER_ADMIN",
       availability: "Active",

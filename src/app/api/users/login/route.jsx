@@ -2,7 +2,7 @@
 import { NextResponse } from 'next/server';
 import { SignJWT } from 'jose'; // Import the SignJWT class from jose
 
-const SECRET_KEY = new TextEncoder().encode('chendanvasu'); // Use TextEncoder to encode the secret key
+const SECRET_KEY = new TextEncoder().encode('SRM_Travels'); // Use TextEncoder to encode the secret key
 
 export async function POST(request) {
   const { email, password } = await request.json();

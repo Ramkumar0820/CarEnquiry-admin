@@ -92,7 +92,7 @@ const LoginPage = () => {
             {loading ? "Logging in..." : "Login"}
           </Button>
           <div>
-            {/* <p>Email- admin@carsale.com</p>
+            {/* <p>Email- ranjithkumarsrmtravels@gmail.com</p>
         <p>Password- 123456</p> */}
           </div>
         </div>

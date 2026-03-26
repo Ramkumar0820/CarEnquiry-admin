@@ -136,7 +136,7 @@ export default function Make() {
                             labelPlacement="outside" type="text"
                             value={newImage}
                             onChange={(e) => setNewImage(e.target.value)}
-                            placeholder="https://image-vasu.jpg"
+                            placeholder="https://image-logo.jpg"
                             className="p-2 w-full mb-4"
                         />
                         <Button className="bg-black text-white" type="submit">
