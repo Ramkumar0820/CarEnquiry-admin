@@ -155,7 +155,7 @@ export default function BlogPostListing() {
               key={post._id}
               className="listingCard shadow-md p-4 mb-4 rounded-lg flex md:flex-row flex-col gap-5 bg-white"
             >
-              <div className="relative block max-w-[250px] lg:w-1/3 sm:w-1/2 w-full md:mx-0 mx-auto">
+              {/* <div className="relative block max-w-[250px] lg:w-1/3 sm:w-1/2 w-full md:mx-0 mx-auto"> */}
                 {/* <p
                   className={`absolute top-2 left-2 z-50 text-white text-sm px-2 py-1 rounded-md font-medium ${
                     post.visibility === "Active" ? "bg-green-600" : "bg-red-600"
@@ -163,11 +163,11 @@ export default function BlogPostListing() {
                 >
                   {post.visibility}
                 </p> */}
-                <img
+                {/* <img
                   src={post.productImg}
                   className="sm:h-[170px] h-[200px] w-full rounded-md mb-2 block m-0 object-cover"
                   alt={post.name}
-                />
+                /> */}
                 {/* <div className="flex gap-2 absolute bottom-4 right-2 z-50">
                   <i className="w-min h-min p-2 rounded-lg bg-primary-50 cursor-pointer text-lg text-black shadow-inner">
                     <Link
@@ -186,20 +186,15 @@ export default function BlogPostListing() {
                     <MdOutlineDelete />
                   </i>
                 </div> */}
-              </div>
+              {/* </div> */}
               <div className="flex flex-1 flex-col relative">
-                <h2 className="text-base font-semibold">
-                  {/* {post.title.length > 25
-                    ? `${post.title.substring(0, 25)}...`
-                    : post.title} */}
-                  {post.productName}
-                </h2>
+
                 <div className="flex flex-wrap gap-2 justify-between">
-                  <p>{post.name}</p>
+                  <p>Name: {post.name}</p>
                   <p>Number : {post.mobile}</p>
                   <p>Email : {post.email}</p>
                 </div>
-                <p className="text-lg font-bold text-black">{post.message}</p>
+                <p className="text-lg"> <strong className="text-lg font-bold text-black py-2">Message:</strong> {post.message}</p>
                 <div className="mt-auto flex justify-end gap-4 pt-4">
                   <Button
                     type="button"

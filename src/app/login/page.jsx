@@ -133,7 +133,7 @@ const LoginPage = () => {
           </h2>
 
           <p className="text-lg max-w-2xl text-white/90">
-            Discover seamless cab services with Madurai SRM Travels — where comfort meets reliability.
+            Discover seamless cab services with Madurai SRM Tourism & Travels — where comfort meets reliability.
             From city rides to long-distance journeys, travel with confidence and ease.
           </p>
         </div>

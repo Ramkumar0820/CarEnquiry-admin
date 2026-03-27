@@ -164,7 +164,7 @@ export default function BlogPostListing() {
                   {post.visibility}
                 </p> */}
                 <img
-                  src={post.productImg}
+                  src={post.productImg || post.vehicleImg}
                   className="sm:h-[170px] h-[200px] w-full rounded-md mb-2 block m-0 object-cover"
                   alt={post.name}
                 />

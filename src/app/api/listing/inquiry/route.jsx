@@ -53,25 +53,23 @@ export async function GET(req) {
 // POST endpoint to add a new inquiry
 export async function POST(req) {
   try {
-    await connectToDatabase(); // Connect to MongoDB
+    await connectToDatabase();
 
     const db = mongoose.connection;
-
     const mainPostCollection = db.collection("CarInquiries");
 
-    const postData = await req.json(); // Assuming POST data is JSON
+    const postData = await req.json();
 
-    // Generate a random 6-digit number
+    // Generate a random 6-digit ID
     const randomSixDigitNumber = Math.floor(100000 + Math.random() * 900000);
-
-    // Add the custom key-value pair
     postData["id"] = randomSixDigitNumber;
 
-    const insertResult = await mainPostCollection.insertOne(postData); // Insert data
+    const insertResult = await mainPostCollection.insertOne(postData);
 
-    // Create a notification for the new inquiry
     try {
-      // const notificationsCollection = db.collection("Notifications");
+      // ==========================
+      // Create admin notification
+      // ==========================
       const notification = {
         type: "inquiry",
         message: `New inquiry from ${postData.name} for ${postData.productName}`,
@@ -80,21 +78,104 @@ export async function POST(req) {
         read: false,
         createdAt: new Date(),
       };
+
       await Notification.create(notification);
+
+      // ==========================
+      // EMAIL → Admin
+      // ==========================
+      const emailHTML = `
+        <h2>🚗 New Booking Inquiry</h2>
+        <p><b>Name:</b> ${postData.name}</p>
+        <p><b>Phone:</b> ${postData.mobile}</p>
+        <p><b>Email:</b> ${postData.email}</p>
+        <p><b>Car:</b> ${postData.productName}</p>
+        <p><b>Vehicle Name:</b> ${postData.vehicleName}</p>
+        <p><b>Pickup:</b> ${postData.pickup}</p>
+        <p><b>Drop:</b> ${postData.drop}</p>
+        <p><b>Date:</b> ${postData.date}</p>
+        <p><b>Price/km:</b> ${postData.price}</p>
+      `;
+
+      await sendMail({
+        subject: "New Booking Inquiry Received",
+        html: emailHTML,
+      });
+
+      // ==========================
+      // WHATSAPP → Admin
+      // ==========================
+      // const whatsappAdminMessage = `
+      // 🚗 *New Booking Inquiry*
+
+      // *Name:* ${postData.name}
+      // *Phone:* ${postData.phone}
+      // *Email:* ${postData.email}
+      // *Car:* ${postData.productName}
+      // *Vehicle:* ${postData.vehicleName}
+      // *Pickup:* ${postData.pickupLocation}
+      // *Drop:* ${postData.dropLocation}
+      // *Date:* ${postData.date}
+      // *Price:* ${postData.price}
+      // `;
+
+      // await sendWhatsApp(whatsappAdminMessage);
+
+      // ==========================
+      // AUTO REPLY → Customer WhatsApp
+      // ==========================
+      // if (postData.phone) {
+      //   const whatsappCustomerReply = `
+      //   Hi ${postData.name},
+
+      //   Thank you for contacting *SRM Travels* 🚗
+
+      //   We have received your booking request for *${postData.productName}* on *${postData.date}*.
+
+      //   ⏳ Please wait — our team will reach you shortly to confirm your booking.
+
+      //   Regards,
+      //   SRM Travels Team
+      //   `;
+
+      //   await sendWhatsApp(whatsappCustomerReply, postData.phone);
+      // }
+
+      // ==========================
+      // AUTO REPLY → Customer Email
+      // ==========================
+      if (postData.email) {
+        const customerEmailHTML = `
+          <h2>Thank you for your inquiry 🚗</h2>
+          <p>Hi ${postData.name},</p>
+          <p>We have received your booking request for <b>${postData.productName}</b>.</p>
+          <p>Our team will contact you shortly to confirm your booking.</p>
+          <br/>
+          <p>Regards,<br/> 📍 SRM Tourism & Travels - MADURAI, <br/> 📞 Contact: +91 7871082904 | +91 7806816229  </p>
+        `;
+
+        await sendMail({
+          subject: "We received your booking request",
+          html: customerEmailHTML,
+          to: postData.email,   // important change
+        });
+      }
+
     } catch (notifyErr) {
-      console.error("Failed to create notification:", notifyErr);
+      console.error("Notification/Email/WhatsApp error:", notifyErr);
     }
 
     return NextResponse.json({
       message: "Inquiry added successfully",
       postId: insertResult.insertedId,
-      postData,
+      postData
     });
+
   } catch (error) {
-    console.error("Error adding inquiry to MongoDB:", error);
+    console.error("Error adding inquiry:", error);
     return NextResponse.json(
-      { error: "Failed to add inquiry to MongoDB" },
-      { status: 500 },
+      { error: "Failed to add inquiry" },
+      { status: 500 }
     );
   }
 }

@@ -1,18 +1,22 @@
 import nodemailer from "nodemailer";
 
-export async function sendMail({ to, subject, html }) {
+export const sendMail = async ({ subject, html, to }) => {
   const transporter = nodemailer.createTransport({
-    service: "gmail",
+    host: process.env.BC_SMTP_HOST,
+    port: Number(process.env.BC_SMTP_PORT),
+    secure: false,
     auth: {
-      user: process.env.MAIL_USER,
-      pass: process.env.MAIL_PASS,
+      user: process.env.BC_SMTP_USER,
+      pass: process.env.BC_SMTP_PASS,
     },
   });
 
   await transporter.sendMail({
-    from: `"Car Sale" <${process.env.MAIL_USER}>`,
-    to,
+    from: `"Madurai SRM Tourism & Travels" <${process.env.BC_SMTP_FROM}>`,
+    to: to || process.env.ADMIN_EMAIL,
     subject,
     html,
   });
-}
+};
+
+

@@ -81,6 +81,44 @@ export async function POST(req) {
         createdAt: new Date(),
       };
       await Notification.create(notification);
+
+
+      // ==========================
+      // EMAIL → Admin
+      // ==========================
+      const emailHTML = `
+        <h2>🚗 New Booking Inquiry</h2>
+        <p><b>Name:</b> ${postData.name}</p>
+        <p><b>Phone:</b> ${postData.mobile}</p>
+        <p><b>Email:</b> ${postData.email}</p>
+        <p><b>Car:</b> ${postData.productName}</p>
+        <p><b>Vehicle Name:</b> ${postData.vehicleName}</p>
+        <p><b>Pickup:</b> ${postData.pickup}</p>
+        <p><b>Drop:</b> ${postData.drop}</p>
+        <p><b>Date:</b> ${postData.date}</p>
+        <p><b>Price/km:</b> ${postData.price}</p>
+      `;
+      
+      await sendMail({
+        subject: "New Booking Inquiry Received",
+        html: emailHTML,
+      });
+      if (postData.email) {
+        const customerEmailHTML = `
+          <h2>Thank you for your inquiry 🚗</h2>
+          <p>Hi ${postData.name},</p>
+          <p>We have received your booking request for <b>${postData.productName}</b>.</p>
+          <p>Our team will contact you shortly to confirm your booking.</p>
+          <br/>
+          <p>Regards,<br/> 📍 SRM Tourism & Travels - MADURAI, <br/> 📞 Contact: +91 7871082904 | +91 7806816229  </p>
+        `;
+
+        await sendMail({
+          subject: "We received your booking request",
+          html: customerEmailHTML,
+          to: postData.email,   // important change
+        });
+      }
     } catch (notifyErr) {
       console.error("Failed to create notification:", notifyErr);
     }
