@@ -291,8 +291,8 @@ const PostList = () => {
             isModelDisabled,
           )}
         </div>
-        <div className="flex justify-center items-center gap-3 flex-col md:flex-row">
-          {renderInputField("year", "year", "Enter car year", "Year", "number")}
+        {/* <div className="flex justify-center items-center gap-3 flex-col md:flex-row"> */}
+          {/* {renderInputField("year", "year", "Enter car year", "Year", "number")} */}
           {/* {renderSelectField(
             "Item Condition",
             "itemCondition",
@@ -318,7 +318,7 @@ const PostList = () => {
             formData.mileageUnit,
             mileageUnitOptions,
           )} */}
-        </div>
+        {/* </div> */}
         {/* <div className="flex justify-center items-center gap-3 flex-col md:flex-row">
           {renderSelectField(
             "Item Condition",
