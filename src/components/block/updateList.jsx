@@ -146,9 +146,9 @@ const PostList = ({ listingId }) => {
     "price",
     "make",
     "model",
-    "year",
-    "color",
-    "numberOfDoors",
+    // "year",
+    // "color",
+    // "numberOfDoors",
     "vehicleSeatingCapacity",
     "date",
   ];
@@ -169,10 +169,10 @@ const PostList = ({ listingId }) => {
        toast.error("Please upload a car image");
        return;
      }
-     if (!formData.description || formData.description.trim() === "") {
-       toast.error("Please enter description");
-       return;
-     }
+    //  if (!formData.description || formData.description.trim() === "") {
+    //    toast.error("Please enter description");
+    //    return;
+    //  }
 
      const form = new FormData();
 
@@ -310,24 +310,14 @@ const PostList = ({ listingId }) => {
                 isModelDisabled,
               )}
             </div>
-            <div className="flex justify-center items-center gap-3 flex-col md:flex-row">
-              {renderInputField(
-                "year",
-                "year",
-                "Enter car year",
-                "Year",
-                "number",
-              )}
-              {renderSelectField(
-                "Condition",
-                "itemCondition",
-                options.itemConditionOptions,
-              )}
+            {/* <div className="flex justify-center items-center gap-3 flex-col md:flex-row"> */}
+
+{/* 
               {renderSelectField(
                 "Availability",
                 "availability",
                 options.availabilityOptions,
-              )}
+              )} */}
               {/* {renderInputField(
                 "mileage",
                 "mileage",
@@ -340,7 +330,7 @@ const PostList = ({ listingId }) => {
                 "mileageUnit",
                 options.mileageUnitOptions,
               )} */}
-            </div>
+            {/* </div> */}
             {/* <div className="flex justify-center items-center gap-3 flex-col md:flex-row">
               {renderSelectField(
                 "Condition",
@@ -360,13 +350,13 @@ const PostList = ({ listingId }) => {
                 "color",
                 colorData.map((color) => color.color),
               )}
-              {renderInputField(
+              {/* {renderInputField(
                 "numberOfDoors",
                 "numberOfDoors",
                 "Enter number of doors",
                 "Number of Doors",
                 "number",
-              )}
+              )} */}
               {renderSelectField(
                 "Fuel Type",
                 "fuelType",
@@ -478,7 +468,7 @@ const PostList = ({ listingId }) => {
                 ))}
               </CheckboxGroup>
             </div>
-            <div>
+            {/* <div>
               <p htmlFor="description" className="font-bold pb-3">
                 Description
               </p>
@@ -488,7 +478,7 @@ const PostList = ({ listingId }) => {
                 data={formData.description}
                 onChange={handleEditorChange}
               />
-            </div>
+            </div> */}
             <div>
               <Button type="submit" className="bg-black text-white">
                 Update

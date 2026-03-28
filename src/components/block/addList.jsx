@@ -125,9 +125,9 @@ const PostList = () => {
   "price",
   "make",
   "model",
-  "year",
-  "color",
-  "numberOfDoors",
+  // "year",
+  // "color",
+  // "numberOfDoors",
   "vehicleSeatingCapacity",
   "date",
 ];
@@ -148,10 +148,10 @@ const PostList = () => {
        toast.error("Please upload a car image");
        return;
      }
-     if (!formData.description || formData.description.trim() === "") {
-       toast.error("Please enter description");
-       return;
-     }
+    //  if (!formData.description || formData.description.trim() === "") {
+    //    toast.error("Please enter description");
+    //    return;
+    //  }
 
     const form = new FormData();
 
@@ -463,7 +463,7 @@ const PostList = () => {
             ))}
           </CheckboxGroup>
         </div>
-        <div>
+        {/* <div>
           <p htmlFor="description" className="font-bold pb-3">
             Description
           </p>
@@ -473,7 +473,7 @@ const PostList = () => {
             data={formData.description}
             onChange={handleEditorChange}
           />
-        </div>
+        </div> */}
         <Button type="submit" className="bg-black text-white">
           Sumbit
         </Button>
